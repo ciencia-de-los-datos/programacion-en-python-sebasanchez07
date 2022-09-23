@@ -11,17 +11,23 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+def importar_datos(ruta_datos):
+  with open(ruta_datos, "r") as archivo:
+    datos_taller = archivo.readlines()
+    datos_taller = [elemento.replace("\n", "") for elemento in datos_taller] 
+    datos_taller = [elemento.split("\t") for elemento in datos_taller] 
 
+  return datos_taller
+
+datos = importar_datos(ruta_datos = "data.csv")
 
 def pregunta_01():
-    """
-    Retorne la suma de la segunda columna.
+    lista = []
+    for i in range(len(datos)):
+      lista.append(int(datos[i][1]))
+      resultado = sum(lista)
 
-    Rta/
-    214
-
-    """
-    return
+    return resultado
 
 
 def pregunta_02():
