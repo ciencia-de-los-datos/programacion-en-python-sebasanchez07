@@ -21,6 +21,12 @@ def importar_datos(ruta_datos):
 
 datos = importar_datos(ruta_datos = "data.csv")
 
+def variable(num):
+    lista = []
+    for i in range(len(datos)):
+        lista.append(datos[i][num])
+    return lista
+
 def pregunta_01():
     lista = []
     for i in range(len(datos)):
@@ -72,21 +78,37 @@ def pregunta_02():
 
 
 def pregunta_03():
-    """
-    Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
-    de tuplas (letra, suma) ordendas alfabeticamente.
+    def variable(num):
+        lista = []
+        for i in range(len(datos)):
+            lista.append(datos[i][num])
+        return lista
 
-    Rta/
-    [
-        ("A", 53),
-        ("B", 36),
-        ("C", 27),
-        ("D", 31),
-        ("E", 67),
+    def sumacol2(letra):
+        listaletras = []
+        for i in range(len(variable(num = 0))):
+            listaletras.append(variable(num = 0)[i] == letra)
+        sumaletra = []
+        for i in range(len(listaletras)):
+            sumaletra.append(int(variable(num = 1)[i]) * listaletras[i])
+        res = sum(sumaletra)
+        return res 
+
+    letras = ["A", "B", "C", "D", "E"]
+    letra = []
+    sumatoria = []
+    for i in range(len(letras)):
+        letra.append(letras[i])
+        sumatoria.append(sumacol2(letra = letras[i]))
+    
+    resultado = [
+        (letra[0], sumatoria[0]),
+        (letra[1], sumatoria[1]),
+        (letra[2], sumatoria[2]),
+        (letra[3], sumatoria[3]),
+        (letra[4], sumatoria[4])
     ]
-
-    """
-    return
+    return resultado
 
 
 def pregunta_04():
