@@ -31,21 +31,44 @@ def pregunta_01():
 
 
 def pregunta_02():
-    """
-    Retorne la cantidad de registros por cada letra de la primera columna como la lista
-    de tuplas (letra, cantidad), ordendas alfabéticamente.
+    
+    letras = ["A", "B", "C", "D", "E"]
+    
+    # Función 1: Seleccionar la columna 1
+    def variable():
+        lista = []
+        for i in range(len(datos)):
+            lista.append(datos[i][0])
+        return lista
 
-    Rta/
-    [
-        ("A", 8),
-        ("B", 7),
-        ("C", 5),
-        ("D", 6),
-        ("E", 14),
-    ]
+    # Función 2: Conteo para cada letra
+    def suma_letra(letra):
+        prueba = []
+        for i in range(len(variable())):
+            prueba.append(variable()[i] == letra)
+        res = sum(prueba)
+        
+        return res
 
-    """
-    return
+    # Función 3: Resultado final 
+    def resultado(x):
+        letra = []
+        conteo = []
+        
+        for i in range(len(x)):
+            letra.append(letras[i])
+            conteo.append(suma_letra(letra = letras[i]))
+            
+        res = [
+            (letra[0], conteo[0]),
+            (letra[1], conteo[1]),
+            (letra[2], conteo[2]),
+            (letra[3], conteo[3]),
+            (letra[4], conteo[4])
+            ]
+        return res
+    
+    return resultado(x = letras)
 
 
 def pregunta_03():
