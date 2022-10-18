@@ -112,28 +112,49 @@ def pregunta_03():
 
 
 def pregunta_04():
-    """
-    La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
-    registros por cada mes, tal como se muestra a continuación.
+    def variable(num):
+        lista = []
+        for i in range(len(datos)):
+            lista.append(datos[i][num])
+        return lista
 
-    Rta/
-    [
-        ("01", 3),
-        ("02", 4),
-        ("03", 2),
-        ("04", 4),
-        ("05", 3),
-        ("06", 3),
-        ("07", 5),
-        ("08", 6),
-        ("09", 3),
-        ("10", 2),
-        ("11", 2),
-        ("12", 3),
+    mes = []
+    for i in range(len(variable(num=2))):
+        mes.append(variable(num=2)[i].split("-")[1])
+
+    def suma_mes(x):
+        prueba = []
+        for i in range(len(mes)):
+            prueba.append(mes[i] == x)
+        res = sum(prueba)
+
+        return res
+
+    num_mes = []
+    conteo = []
+    meses = ["01", "02", "03", "04", "05", "06",
+             "07", "08", "09", "10", "11", "12"]
+
+    for i in range(len(meses)):
+        num_mes.append(meses[i])
+        conteo.append(suma_mes(x=meses[i]))
+
+    res = [
+        (num_mes[0], conteo[0]),
+        (num_mes[1],  conteo[1]),
+        (num_mes[2], conteo[2]),
+        (num_mes[3], conteo[3]),
+        (num_mes[4], conteo[4]),
+        (num_mes[5], conteo[5]),
+        (num_mes[6], conteo[6]),
+        (num_mes[7], conteo[7]),
+        (num_mes[8], conteo[8]),
+        (num_mes[9], conteo[9]),
+        (num_mes[10], conteo[10]),
+        (num_mes[11], conteo[11])
     ]
+    return res
 
-    """
-    return
 
 
 def pregunta_05():
