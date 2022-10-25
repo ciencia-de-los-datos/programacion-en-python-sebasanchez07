@@ -11,15 +11,20 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+
+
 def importar_datos(ruta_datos):
-  with open(ruta_datos, "r") as archivo:
-    datos_taller = archivo.readlines()
-    datos_taller = [elemento.replace("\n", "") for elemento in datos_taller] 
-    datos_taller = [elemento.split("\t") for elemento in datos_taller] 
+    with open(ruta_datos, "r") as archivo:
+        datos_taller = archivo.readlines()
+        datos_taller = [elemento.replace("\n", "")
+                        for elemento in datos_taller]
+        datos_taller = [elemento.split("\t") for elemento in datos_taller]
 
-  return datos_taller
+    return datos_taller
 
-datos = importar_datos(ruta_datos = "data.csv")
+
+datos = importar_datos(ruta_datos="data.csv")
+
 
 def variable(num):
     lista = []
@@ -27,19 +32,20 @@ def variable(num):
         lista.append(datos[i][num])
     return lista
 
+
 def pregunta_01():
     lista = []
     for i in range(len(datos)):
-      lista.append(int(datos[i][1]))
-      resultado = sum(lista)
+        lista.append(int(datos[i][1]))
+        resultado = sum(lista)
 
     return resultado
 
 
 def pregunta_02():
-    
+
     letras = ["A", "B", "C", "D", "E"]
-    
+
     # Función 1: Seleccionar la columna 1
     def variable():
         lista = []
@@ -53,28 +59,28 @@ def pregunta_02():
         for i in range(len(variable())):
             prueba.append(variable()[i] == letra)
         res = sum(prueba)
-        
+
         return res
 
-    # Función 3: Resultado final 
+    # Función 3: Resultado final
     def resultado(x):
         letra = []
         conteo = []
-        
+
         for i in range(len(x)):
             letra.append(letras[i])
-            conteo.append(suma_letra(letra = letras[i]))
-            
+            conteo.append(suma_letra(letra=letras[i]))
+
         res = [
             (letra[0], conteo[0]),
             (letra[1], conteo[1]),
             (letra[2], conteo[2]),
             (letra[3], conteo[3]),
             (letra[4], conteo[4])
-            ]
+        ]
         return res
-    
-    return resultado(x = letras)
+
+    return resultado(x=letras)
 
 
 def pregunta_03():
@@ -86,21 +92,21 @@ def pregunta_03():
 
     def sumacol2(letra):
         listaletras = []
-        for i in range(len(variable(num = 0))):
-            listaletras.append(variable(num = 0)[i] == letra)
+        for i in range(len(variable(num=0))):
+            listaletras.append(variable(num=0)[i] == letra)
         sumaletra = []
         for i in range(len(listaletras)):
-            sumaletra.append(int(variable(num = 1)[i]) * listaletras[i])
+            sumaletra.append(int(variable(num=1)[i]) * listaletras[i])
         res = sum(sumaletra)
-        return res 
+        return res
 
     letras = ["A", "B", "C", "D", "E"]
     letra = []
     sumatoria = []
     for i in range(len(letras)):
         letra.append(letras[i])
-        sumatoria.append(sumacol2(letra = letras[i]))
-    
+        sumatoria.append(sumacol2(letra=letras[i]))
+
     resultado = [
         (letra[0], sumatoria[0]),
         (letra[1], sumatoria[1]),
@@ -156,19 +162,18 @@ def pregunta_04():
     return res
 
 
-
 def pregunta_05():
-    from collections import Counter    
-    with open( 'data.csv' , "r") as file:
-        data = file.readlines()  
+    from collections import Counter
+    with open('data.csv', "r") as file:
+        data = file.readlines()
     data = [row.replace("\n", "") for row in data]
     data = [row.replace("\t", ",") for row in data]
     data = [row.split(",") for row in data]
     data = [row[0:2] for row in data]
-    data = [(row[0], int(row[1])) for row in data] 
-    respuesta =[(k, max([y for (x,y) in data if x == k]), min([y for (x,y) in data if x == k])) for k in dict(data).keys()]
-    respuesta.sort(reverse = False) 
-
+    data = [(row[0], int(row[1])) for row in data]
+    respuesta = [(k, max([y for (x, y) in data if x == k]), min(
+        [y for (x, y) in data if x == k])) for k in dict(data).keys()]
+    respuesta.sort(reverse=False)
 
     """
     Retorne una lista de tuplas con el valor maximo y minimo de la columna 2 por cada
@@ -188,6 +193,33 @@ def pregunta_05():
 
 
 def pregunta_06():
+
+    with open('data.csv', "r") as file:
+        data = file.readlines()
+
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[3:] for row in data]
+
+    columna5 = []
+    for index, element in enumerate(data):
+        lista5 = []
+        for indice, fila in enumerate(element):
+            if len(fila) > 1:
+                lista5.append(fila)
+        columna5.append(lista5)
+
+    lista = []
+    for index, element in enumerate(columna5):
+        lista.extend(element)
+
+    lista = [(row[:3], int(row[4:])) for row in lista]
+    respuesta = [(k, min([y for (x, y) in lista if x == k]), max(
+        [y for (x, y) in lista if x == k])) for k in dict(lista).keys()]
+    respuesta.sort(reverse=False)
+    
+
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
     una clave y el valor despues del caracter `:` corresponde al valor asociado a la
@@ -209,10 +241,28 @@ def pregunta_06():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_07():
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[0:2] for row in data]
+    data = [(int(row[1]), row[0]) for row in data] 
+    
+    counter = {}
+    for key, value in data:
+        if key in counter:       
+            counter[key] += [value]
+        else:
+            counter[key] = [value]
+    
+    respuesta = [(key, counter[key]) for key in counter]
+    respuesta.sort(reverse = False)
+    
     """
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
     valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
@@ -233,10 +283,30 @@ def pregunta_07():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_08():
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]   
+    data = [row[0:2] for row in data]
+    data = [(int(row[1]), row[0]) for row in data] 
+    
+    counter = {}
+    for key, value in data:
+        if key in counter:       
+            counter[key] += [value]
+        else:
+            counter[key] = [value]
+    
+    respuesta = [(key, counter[key]) for key in counter]
+    respuesta = [(row[0], list(set(row[1]))) for row in respuesta] 
+    respuesta = [(row[0], sorted(row[1])) for row in respuesta]     
+    respuesta.sort(reverse = False)
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla contiene  el valor
     de la segunda columna; la segunda parte de la tupla es una lista con las letras
@@ -258,10 +328,45 @@ def pregunta_08():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_09():
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[3:] for row in data]
+    
+    new_data = []
+    for index, element in enumerate (data):
+        lista = []
+        for indice, fila in enumerate (element):
+            if len(fila) > 1:
+                lista.append(fila)
+        new_data.append(lista)
+                
+    lista = []
+    for index, element in enumerate (new_data):
+        lista.extend(element)
+    
+    lista = [row.replace(":", ",") for row in lista]    
+    lista = [row.split(',') for row in lista]  
+    lista = [(row[0], (int(row[1]))) for row in lista] 
+
+    counter = {}
+    for key, value in lista:
+        if key in counter:       
+            counter[key] += 1
+        else:
+            counter[key] = 1
+
+    respuesta = list(counter.items())
+    respuesta.sort(reverse = False)
+    respuesta = dict (respuesta)
+    
     """
     Retorne un diccionario que contenga la cantidad de registros en que aparece cada
     clave de la columna 5.
@@ -281,10 +386,40 @@ def pregunta_09():
     }
 
     """
-    return
+    return respuesta
 
 
 def pregunta_10():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    columna1 = [row[0] for row in data]  
+    data = [row[3:] for row in data]
+    
+    columna4 = []
+    columna5 = []
+    for index, element in enumerate (data):
+        lista4 = []
+        lista5 = []
+        for indice, fila in enumerate (element):
+            if len(fila) > 1:
+                lista5.append(fila)
+            if len(fila) == 1:
+                lista4.append(fila)
+        columna4.append(lista4)
+        columna5.append(lista5)
+    
+    columna4 = [len(row) for row in columna4]  
+    columna5 = [len(row) for row in columna5]  
+    
+    respuesta =[]
+    for index, element in enumerate (columna1):
+        respuesta.append((str(element), columna4[index], columna5[index]))
+        
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la columna 1 y la
     cantidad de elementos de las columnas 4 y 5.
@@ -302,10 +437,43 @@ def pregunta_10():
 
 
     """
-    return
+    return respuesta
 
 
 def pregunta_11():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()        
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    columna2 = [row[1] for row in data]  
+    data = [row[3:] for row in data]
+    
+    columna4 = []
+    for index, element in enumerate (data):
+        lista4 = []
+        for indice, fila in enumerate (element):
+            if len(fila) == 1:
+                lista4.append(fila)
+        columna4.append(lista4)
+    
+    lista = []
+    for index, element in enumerate (columna4):
+        lista.extend(element)
+    
+    clave = set(lista)
+    clave = sorted(clave)
+    
+    respuesta = {}
+    for ind_clave, elem_clave in enumerate (clave): 
+        for ind_c4, elem_c4 in enumerate(columna4):
+            if elem_clave in elem_c4:
+                if elem_clave in respuesta:
+                    respuesta[elem_clave] += int(columna2[ind_c4])
+                else: 
+                    respuesta[elem_clave] = int(columna2[ind_c4])
     """
     Retorne un diccionario que contengan la suma de la columna 2 para cada letra de la
     columna 4, ordenadas alfabeticamente.
@@ -323,10 +491,47 @@ def pregunta_11():
 
 
     """
-    return
+    return respuesta
 
 
 def pregunta_12():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()    
+    
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    columna1= [row[0] for row in data]  
+    data = [row[3:] for row in data]
+    
+    columna5 = []
+    for index, element in enumerate (data):
+        lista5 = []
+        for indice, fila in enumerate (element):
+            if len(fila) > 1:
+                lista5.append(fila)
+        columna5.append(lista5)
+    
+    #columna5 = [[e[:3] for e in row] for row in columna5]
+    
+    count_column5 = [[int(e[4:]) for e in row] for row in columna5]
+    count_column5 = [sum(row) for row in count_column5] 
+    
+    lista =[]
+    for index, element in enumerate (columna1):
+        lista.append((str(element), count_column5[index]))
+                   
+    respuesta = {}
+    for key, value in lista:
+        if key in respuesta:       
+            respuesta[key] += value
+        else:
+            respuesta[key] = value        
+        
+    respuesta = list(respuesta.items())
+    respuesta.sort(reverse = False)
+    respuesta = dict (respuesta)
     """
     Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
     los valores de la columna 5 sobre todo el archivo.
@@ -341,4 +546,4 @@ def pregunta_12():
     }
 
     """
-    return
+    return respuesta
