@@ -169,6 +169,7 @@ def pregunta_05():
     respuesta =[(k, max([y for (x,y) in data if x == k]), min([y for (x,y) in data if x == k])) for k in dict(data).keys()]
     respuesta.sort(reverse = False) 
 
+
     """
     Retorne una lista de tuplas con el valor maximo y minimo de la columna 2 por cada
     letra de la columa 1.
